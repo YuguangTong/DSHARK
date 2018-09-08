@@ -1,25 +1,25 @@
 
 &wavenumber
 kstart = 0.2
-kend = 4.0
-nk = 150
+kend = 1.0
+nk = 50
 /
 
 &initial_guess
-omega_r = 0.03472963553338609
+omega_r = 1.684387323369225
 omega_i = -1e-06
 increment_r = 0
 increment_i = 0
 /
 
 &setup
-Nspecies = 2
+Nspecies = 3
 theta = 80
 delta = 0.0001
 /
 
 &accuracy
-rf_error = 0.001
+rf_error = 0.0001
 eps_error = 1e-06
 /
 
@@ -27,7 +27,7 @@ eps_error = 1e-06
 q_in = 1.0
 mu_in = 1.0
 dens_in = 1.0
-drift_in = 0.0
+drift_in = 47.49999999999999
 beta_para_in = 0.25
 beta_perp_in = 0.25
 kappa_in = 100
@@ -36,9 +36,19 @@ kappa_in = 100
 &species
 q_in = -1.0
 mu_in = 1836.0
-dens_in = 1.0
+dens_in = 0.95
+drift_in = 49.99999999999999
+beta_para_in = 0.475
+beta_perp_in = 0.475
+kappa_in = 100
+/
+
+&species
+q_in = -1.0
+mu_in = 1836.0
+dens_in = 0.05
 drift_in = 0.0
-beta_para_in = 0.25
-beta_perp_in = 0.25
+beta_para_in = 0.15000000000000002
+beta_perp_in = 0.15000000000000002
 kappa_in = 100
 /
