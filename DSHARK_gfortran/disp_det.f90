@@ -102,11 +102,11 @@ function disp_det(omega,k)
 
               epsilon_zz=epsilon_zz+ 4.0*sqrt(2.0)/sqrt( mu(m))*dens(m)**2.5 * q(m)**2 * (kappa(m)-0.5)/& 
                    & (2.0*kappa(m)-3.0)**1.5 *(kappa(m)+1.0)**1.5 /beta_perp(m) /&
-                   & sqrt(beta_para(m)) / (k*cos(theta))**3 *beta_ratio(m) * omega**3 * intxxa 
+                   & sqrt(beta_para(m)) / (k*cos(theta))**3 *beta_ratio(m) * omega**2 * (omega-k*cos(theta)*drift(m)) * intxxa 
 
               epsilon_yz=epsilon_yz-4.0*i *dens(m)**2 *  q(m)**2 * (kappa(m)-0.5)/(2.0*kappa(m)-3.0) *&
                    & (kappa(m)+1.0)**1.5 /sqrt(beta_perp(m)) *1.0/((k*cos(theta))**2 *&
-                   & sqrt(beta_para(m)))* beta_ratio(m) *omega*omega *intxya 
+                   & sqrt(beta_para(m)))* beta_ratio(m) *(omega-k*cos(theta)*drift(m))*omega *intxya 
 
            else
 
@@ -181,12 +181,12 @@ function disp_det(omega,k)
                  del_zz = 4.0*sqrt(2.0)/sqrt( mu(m))*dens(m)**2.5 * q(m)**2 * (kappa(m)-0.5)/& 
                       & (2.0*kappa(m)-3.0)**1.5 *(kappa(m)+1.0)**1.5 /beta_perp(m) /&
                       & sqrt(beta_para(m)) / (k*cos(theta))**3 * (beta_ratio(m) * omega - n*(beta_ratio(m) & 
-                      & -1.0) * mu(m)*q(m))*(omega-n*mu(m)*q(m))**2 * intxxa +&
+                      & -1.0) * mu(m)*q(m))*(omega-n*mu(m)*q(m))* (omega-k*cos(theta)*drift(m)-n*mu(m)*q(m)) * intxxa +&
                       
                       & 4.0*sqrt(2.0)/sqrt( mu(m))*dens(m)**2.5 * q(m)**2 * (kappa(m)-0.5)/& 
                       & (2.0*kappa(m)-3.0)**1.5 *(kappa(m)+1.0)**1.5 /beta_perp(m) /&
                       & sqrt(beta_para(m)) / (k*cos(theta))**3 * (beta_ratio(m) * omega + n*(beta_ratio(m) & 
-                      & -1.0) * mu(m)*q(m))*(omega+n*mu(m)*q(m))**2 * intxxb
+                      & -1.0) * mu(m)*q(m))*(omega+n*mu(m)*q(m))* (omega-k*cos(theta)*drift(m)+n*mu(m)*q(m)) * intxxb
 
                  del_zz = del_zz + 4.0*sqrt(2.0)*n*(kappa(m)+1.0)**1.5 / (2.0*kappa(m)-3.0)**1.5 * dens(m)**2.5 * &
                       & q(m)**3 * mu(m)**0.5 * (kappa(m)-1.0) * drift(m) / (k*cos(theta)**2) / beta_perp(m) / &
@@ -235,7 +235,6 @@ function disp_det(omega,k)
               endif
 
               if(esc(5)) then
-                 vd_thetapar = drift(m) * sqrt(2.0*kappa(m)) / sqrt(2.0*kappa(m)-3.0) * sqrt(dens(m) * mu(m) / beta_para(m))
                  
                  del_xz = 4.0*sqrt(2.0) * sqrt(mu(m)) *dens(m)**2.5 * q(m)**3 *  (kappa(m)-0.5)/&
                       & (2.0*kappa(m)-3.0)**1.5  *&
@@ -248,8 +247,7 @@ function disp_det(omega,k)
                       & (kappa(m)+1.0)**1.5 /beta_perp(m) /(k*sin(theta)) /sqrt(beta_para(m))/(k*cos(theta))**2 *&
                       & n * (beta_ratio(m) * (omega-k*cos(theta)*drift(m)) + n*(beta_ratio(m)-1.0) * mu(m)*q(m))*&
                       & (omega+n*mu(m)*q(m))*intxxb
-                 
-                 del_xz = del_xz * (1.0 + vd_thetapar)
+
                  
                  if((n.le.4).or.((n.gt.4).and.((abs(real(del_xz)/ real(epsilon_xz)).gt.eps_error).or. &
                       & (abs(aimag(del_xz)/aimag(epsilon_xz)).gt.eps_error)))) then
@@ -262,18 +260,16 @@ function disp_det(omega,k)
               endif
 
               if(esc(6)) then
-                 vd_thetapar = drift(m) * sqrt(2.0*kappa(m)) / sqrt(2.0*kappa(m)-3.0) * sqrt(dens(m) * mu(m) / beta_para(m))
                  
                  del_yz = (-4.0)*i *dens(m)**2 *  q(m)**2 * (kappa(m)-0.5)/(2.0*kappa(m)-3.0) *&
                       & (kappa(m)+1.0)**1.5 /sqrt(beta_perp(m)) *1.0/((k*cos(theta))**2 *&
                       & sqrt(beta_para(m)))* (beta_ratio(m) *&
-                      & omega - n*(beta_ratio(m)-1.0) * mu(m)*q(m))*(omega-k*cos(theta)*drift(m)-n*mu(m)*q(m))*intxya +&
+                      & (omega-k*cos(theta)*drift(m)) - n*(beta_ratio(m)-1.0) * mu(m)*q(m))*(omega-n*mu(m)*q(m))*intxya +&
                       
                       & (-4.0)*i *dens(m)**2 *  q(m)**2 * (kappa(m)-0.5)/(2.0*kappa(m)-3.0) *&
                       & (kappa(m)+1.0)**1.5 /sqrt(beta_perp(m)) *1.0/((k*cos(theta))**2 *&
                       & sqrt(beta_para(m)))* (beta_ratio(m) *&
-                      & omega + n*(beta_ratio(m)-1.0) * mu(m)*q(m))*(omega-k*cos(theta)*drift(m)+n*mu(m)*q(m))*intxyb
-                 del_yz = del_yz * (1.0 + vd_thetapar)
+                      & (omega-k*cos(theta)*drift(m)) + n*(beta_ratio(m)-1.0) * mu(m)*q(m))*(omega+n*mu(m)*q(m))*intxyb
                  
                  if((n.le.4).or.((n.gt.4).and.((abs(real(del_yz)/ real(epsilon_yz)).gt.eps_error).or. &
                       & (abs(aimag(del_yz)/aimag(epsilon_yz)).gt.eps_error)))) then
