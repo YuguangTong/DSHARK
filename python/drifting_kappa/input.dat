@@ -1,13 +1,13 @@
 
 &wavenumber
 kstart = 0.2
-kend = 2.5
-nk = 60
+kend = 0.4
+nk = 20
 /
 
 &initial_guess
 omega_r = 0.03472963553338609
-omega_i = -1e-06
+omega_i = 0
 increment_r = 0
 increment_i = 0
 /
@@ -37,7 +37,7 @@ kappa_in = 50
 q_in = -1.0
 mu_in = 1836.0
 dens_in = 0.9
-drift_in = 3.0
+drift_in = 0.0
 beta_para_in = 0.45
 beta_perp_in = 0.45
 kappa_in = 50
@@ -47,8 +47,8 @@ kappa_in = 50
 q_in = -1.0
 mu_in = 1836.0
 dens_in = 0.1
-drift_in = -27.0
+drift_in = -0.0
 beta_para_in = 0.30000000000000004
 beta_perp_in = 0.30000000000000004
-kappa_in = 32
+kappa_in = 50
 /

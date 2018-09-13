@@ -1,0 +1,3 @@
+# PyDSHARK
+
+PyDSHARK wraps DSHARK with the help of `f2py` compiler. To build the `py_dshark` library, simply run `make`. A simple test script `test_script.py` shows how to use PyDSHARK. Run `make test` to try it out.
